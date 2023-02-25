@@ -1,6 +1,7 @@
 const calc = require("./4-1-calc/index.js");
-const calcEvents = require("./4-2-calc-event/index.js");
+const calcEvents = require("./4-1-calc-event/index.js");
+const timer = require("./4-2-timer/index.js");
 
-const app = calcEvents;
+const app = timer;
 
 app();
