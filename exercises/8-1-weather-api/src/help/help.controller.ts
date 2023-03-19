@@ -1,10 +1,10 @@
 import express, { Request, Response } from "express";
-import { getText } from "../services/help.service";
+import { getHelpText } from "../template/template.service";
 
 const helpRouter = express.Router();
 
 helpRouter.get("/", async (req: Request, res: Response) => {
-  res.send(getText());
+    res.send(getHelpText());
 });
 
 export default helpRouter;

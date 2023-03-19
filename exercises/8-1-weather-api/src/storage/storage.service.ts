@@ -6,33 +6,31 @@ import envVariables from "../common/envVariables";
 
 const filePath = join(homedir(), envVariables?.STORAGE_FILENAME || "");
 
-const saveKeyValue = async (
-  newProps: KeyValueObject | KeyValueObject[]
-): Promise<void> => {
-  let data: Record<string, string | number> = {};
+const getFileData = async (): Promise<Partial<Record<STORAGE_KEYS, string | number>>> => {
   if (await isExist(filePath)) {
     const file = await promises.readFile(filePath);
-    data = JSON.parse(file.toString());
+    return JSON.parse(file.toString());
   }
-  if (Array.isArray(newProps)) {
-    newProps.forEach((newProp: KeyValueObject) => {
-      data[newProp.key] = newProp.value;
-    });
-  } else {
-    data[newProps.key] = newProps.value;
-  }
-  await promises.writeFile(filePath, JSON.stringify(data));
+  return {};
+}
+
+const saveKeyValue = async (
+  newProps: KeyValueObject[]
+): Promise<void> => {
+  const fileData = await getFileData();
+
+  newProps.forEach((newProp: KeyValueObject) => {
+    fileData[newProp.key] = newProp.value;
+  });
+
+  await promises.writeFile(filePath, JSON.stringify(fileData));
 };
 
 const getKeyValue = async (
   key: STORAGE_KEYS
 ): Promise<string | number | undefined> => {
-  if (await isExist(filePath)) {
-    const file = await promises.readFile(filePath);
-    const data = JSON.parse(file.toString());
-    return data[key];
-  }
-  return undefined;
+  const fileData = await getFileData();
+  return fileData[key];
 };
 
 const isExist = async (path: string): Promise<boolean> => {

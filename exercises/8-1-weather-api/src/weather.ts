@@ -1,9 +1,10 @@
 import express, { Express, Router } from "express";
 import envVariables from "./common/envVariables";
-import forecastRouter from "./controllers/forecast.controller";
-import helpRouter from "./controllers/help.controller";
-import storageRouter from "./controllers/storage.controller";
-import { printSuccess, showInroduction } from "./services/log.service";
+import forecastRouter from "./forecast/forecast.controller";
+import helpRouter from "./help/help.controller";
+import storageRouter from "./storage/storage.controller";
+import { printSuccess } from "./logger/logger.service";
+import { getInroductionText } from "./template/template.service";
 
 const ROUTES: Record<string, Router> = {
   "/forecast": forecastRouter,
@@ -27,7 +28,7 @@ const init = (): void => {
     printSuccess(
       `💻 Сервер запущен по адресу: http://localhost:${envVariables?.PORT}`
     );
-    showInroduction();
+    console.log(getInroductionText());
   });
 };
 

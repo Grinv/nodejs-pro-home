@@ -1,5 +1,5 @@
 import express, { Request, Response } from "express";
-import { getForecast } from "../services/forecast.service";
+import { getForecast } from "./forecast.service";
 
 const forecastRouter = express.Router();
 

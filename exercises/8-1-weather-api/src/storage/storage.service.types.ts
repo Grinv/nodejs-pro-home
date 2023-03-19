@@ -1,6 +1,6 @@
 export enum STORAGE_KEYS {
-  "TOKEN" = "token",
-  "CITY" = "city",
+  TOKEN = "token",
+  CITY = "city",
 }
 
 export interface KeyValueObject {
