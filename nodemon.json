@@ -1,0 +1,7 @@
+{
+	"watch": [
+		"exercises/8-1-weather-api/src"
+	],
+	"ext": "ts,json",
+	"exec": "ts-node ./exercises/8-1-weather-api/src/weather.ts"
+}
